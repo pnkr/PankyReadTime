@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.1" type="plugin" group="content" method="upgrade">
+	<name>PLG_CONTENT_PANKYREADINGTIME</name>
+	<author>Panayiotis Kiriakopoulos</author>
+	<creationDate>April 2023</creationDate>
+	<copyright>(C) 2023 Panayiotis Kiriakopoulos</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail>kiriakopoulos_p@hotmail.com</authorEmail>
+	<authorUrl>https://github.com/pnkr</authorUrl>
+	<version>1.0.0</version>
+	<description>PLG_CONTENT_PANKYREADINGTIME_XML_DESCRIPTION</description>
+	<files>
+		<filename plugin="pankyreadingtime">pankyreadingtime.php</filename>
+	</files>
+	<languages>
+		<language tag="en-GB">language/en-GB/plg_content_pankyreadingtime.ini</language>
+		<language tag="en-GB">language/en-GB/plg_content_pankyreadingtime.sys.ini</language>
+		<language tag="el-GR">language/el-GR/plg_content_pankyreadingtime.ini</language>
+		<language tag="el-GR">language/el-GR/plg_content_pankyreadingtime.sys.ini</language>
+	</languages>
+</extension>
