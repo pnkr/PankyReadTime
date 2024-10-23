@@ -1,5 +1,5 @@
-# Current artcile average read time (Joomla 4.x Content Plugin)
-This Plugin is a Joomla 4 content plugin that shows information on the average time needed for the active article to be read.
+# Current artcile average read time (Joomla 5.2 Content Plugin)
+This Plugin is a Joomla 5 content plugin that shows information on the average time needed for the active article to be read.
 
 As show in the image below, a label is shown under the article title with detailed information.
 
