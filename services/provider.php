@@ -14,7 +14,7 @@ use Joomla\CMS\Plugin\PluginHelper;
 use Joomla\DI\Container;
 use Joomla\DI\ServiceProviderInterface;
 use Joomla\Event\DispatcherInterface;
-use Panky\Plugin\Content\Pankyreadingtime\Extension\Pankyreadingtime;
+use Panky\Plugin\Content\Pankyreadingtime\Extension\pankyreadingtime;
 
     return new class() implements ServiceProviderInterface
     {
