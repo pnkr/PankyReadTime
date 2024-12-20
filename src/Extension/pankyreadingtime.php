@@ -2,7 +2,7 @@
 /**
  * @package     Joomla.Plugin
  * @subpackage  Content.pankyreadingtime
- * @version     2.0.0
+ * @version     2.1.0
  * @copyright   (C) 2024 Panayiotis Kiriakopoulos
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
