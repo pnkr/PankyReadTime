@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<updates>
+  <update>
+    <name>PankyReadTime</name>
+    <description>Joomla content plugin displaying article reading time and scroll progress bar.</description>
+    <element>pankyreadingtime</element>
+    <type>plugin</type>
+    <folder>content</folder>
+    <client>site</client>
+    <version>3.0.0</version>
+    <infourl>https://github.com/pnkr/PankyReadTime</infourl>
+    <downloads>
+      <!-- Adjust the filename below to match your release asset zip name -->
+      <downloadurl type="full" format="zip">https://github.com/pnkr/PankyReadTime/releases/download/v3.0.0/pankyreadingtime-3.0.0.zip</downloadurl>
+    </downloads>
+    <tags>
+      <tag>stable</tag>
+    </tags>
+  </update>
+</updates>

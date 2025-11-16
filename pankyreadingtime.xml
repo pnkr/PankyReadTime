@@ -7,13 +7,13 @@
 	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
 	<authorEmail>kiriakopoulos_p@hotmail.com</authorEmail>
 	<authorUrl>https://github.com/pnkr</authorUrl>
-	<version>2.1.0</version>
+	<version>3.0.0</version>
 	<description>PLG_CONTENT_PANKYREADINGTIME_XML_DESCRIPTION</description>
 	<namespace path="src">Panky\Plugin\Content\Pankyreadingtime</namespace>
-    <files>
-        <folder plugin="pankyreadingtime">services</folder>
-        <folder>src</folder>
-    </files>
+	<files>
+		<folder plugin="pankyreadingtime">services</folder>
+		<folder>src</folder>
+	</files>
 
 	<languages>
 		<language tag="en-GB">language/en-GB/plg_content_pankyreadingtime.ini</language>
@@ -21,4 +21,63 @@
 		<language tag="el-GR">language/el-GR/plg_content_pankyreadingtime.ini</language>
 		<language tag="el-GR">language/el-GR/plg_content_pankyreadingtime.sys.ini</language>
 	</languages>
+	<config>
+		<fields name="params">
+		<fieldset name="basic" label="PLG_CONTENT_PANKYREADINGTIME_FIELDSET_BASIC_LABEL">
+			<field name="reading_speed" type="text" default="230"
+				label="PLG_CONTENT_PANKYREADINGTIME_READING_SPEED_LABEL" description="PLG_CONTENT_PANKYREADINGTIME_READING_SPEED_DESC" />
+			<field name="show_seconds" type="radio" default="1" label="PLG_CONTENT_PANKYREADINGTIME_SHOW_SECONDS_LABEL"
+				description="PLG_CONTENT_PANKYREADINGTIME_SHOW_SECONDS_DESC">
+				<option value="1">JYES</option>
+				<option value="0">JNO</option>
+			</field>
+
+			<!-- Badge options -->
+			<field name="badge_position" type="list" default="before"
+				label="PLG_CONTENT_PANKYREADINGTIME_BADGE_POSITION_LABEL" description="PLG_CONTENT_PANKYREADINGTIME_BADGE_POSITION_DESC">
+				<option value="before">Before Content</option>
+				<option value="afterTitle">After Title</option>
+				<option value="after">After Content</option>
+			</field>
+			<field name="badge_format" type="list" default="verbose"
+				label="PLG_CONTENT_PANKYREADINGTIME_BADGE_FORMAT_LABEL" description="PLG_CONTENT_PANKYREADINGTIME_BADGE_FORMAT_DESC">
+				<option value="verbose">Verbose</option>
+				<option value="compact">Compact</option>
+			</field>
+			<field name="show_finish_by" type="radio" default="0" label="PLG_CONTENT_PANKYREADINGTIME_SHOW_FINISH_BY_LABEL"
+				description="PLG_CONTENT_PANKYREADINGTIME_SHOW_FINISH_BY_DESC">
+				<option value="1">JYES</option>
+				<option value="0">JNO</option>
+			</field>
+
+			<!-- Progress bar options -->
+			<field name="show_progress_bar" type="radio" default="1" label="PLG_CONTENT_PANKYREADINGTIME_SHOW_PROGRESS_BAR_LABEL"
+				description="PLG_CONTENT_PANKYREADINGTIME_SHOW_PROGRESS_BAR_DESC">
+				<option value="1">JYES</option>
+				<option value="0">JNO</option>
+			</field>
+			<field name="progress_bar_color" type="text" default="#007bff"
+				label="PLG_CONTENT_PANKYREADINGTIME_PROGRESS_BAR_COLOR_LABEL" description="PLG_CONTENT_PANKYREADINGTIME_PROGRESS_BAR_COLOR_DESC" />
+			<field name="progress_bar_height" type="text" default="5"
+				label="PLG_CONTENT_PANKYREADINGTIME_PROGRESS_BAR_HEIGHT_LABEL" description="PLG_CONTENT_PANKYREADINGTIME_PROGRESS_BAR_HEIGHT_DESC" />
+			<field name="progress_bar_position" type="list" default="top"
+				label="PLG_CONTENT_PANKYREADINGTIME_PROGRESS_BAR_POSITION_LABEL" description="PLG_CONTENT_PANKYREADINGTIME_PROGRESS_BAR_POSITION_DESC">
+				<option value="top">PLG_CONTENT_PANKYREADINGTIME_PROGRESS_BAR_POSITION_TOP</option>
+				<option value="bottom">PLG_CONTENT_PANKYREADINGTIME_PROGRESS_BAR_POSITION_BOTTOM</option>
+			</field>
+			<field name="progress_bar_show_percent" type="radio" default="0" label="PLG_CONTENT_PANKYREADINGTIME_PROGRESS_BAR_SHOW_PERCENT_LABEL"
+				description="PLG_CONTENT_PANKYREADINGTIME_PROGRESS_BAR_SHOW_PERCENT_DESC">
+				<option value="1">JYES</option>
+				<option value="0">JNO</option>
+			</field>
+
+			<!-- Visibility toggles removed: plugin restricted to single article view -->
+		</fieldset>
+		</fields>
+	</config>
+	<updateservers>
+    <server type="extension" name="GitHub Releases">
+        https://github.com/pnkr/PankyReadTime/releases/latest/download/update.xml
+    </server>
+</updateservers>
 </extension>
