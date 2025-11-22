@@ -1,5 +1,5 @@
 
-# PankyReadTime (Joomla 5.x Content Plugin)
+# PankyReadTime (Joomla 5.x / 6 Content Plugin)
 
 **Version: 3.0.0**
 
