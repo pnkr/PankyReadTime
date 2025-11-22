@@ -7,7 +7,7 @@
 	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
 	<authorEmail>kiriakopoulos_p@hotmail.com</authorEmail>
 	<authorUrl>https://github.com/pnkr</authorUrl>
-	<version>3.0.0</version>
+	<version>3.0.1</version>
 	<description>PLG_CONTENT_PANKYREADINGTIME_XML_DESCRIPTION</description>
 	<namespace path="src">Panky\Plugin\Content\Pankyreadingtime</namespace>
 	<files>
@@ -76,8 +76,8 @@
 		</fields>
 	</config>
 	<updateservers>
-    <server type="extension" name="GitHub Releases">
-        https://github.com/pnkr/PankyReadTime/releases/latest/download/update.xml
+    <server type="extension" name="Content Plugin PankyReadTime">
+		https://raw.githubusercontent.com/pnkr/PankyReadTime/main/updates.xml
     </server>
 </updateservers>
 </extension>
