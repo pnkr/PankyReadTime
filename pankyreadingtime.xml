@@ -77,7 +77,7 @@
 	</config>
 	<updateservers>
     <server type="extension" name="Content Plugin PankyReadTime">
-		https://raw.githubusercontent.com/pnkr/PankyReadTime/master/update.xml
+		https://raw.githubusercontent.com/pnkr/PankyReadTime/master/updates.xml
     </server>
 </updateservers>
 </extension>
