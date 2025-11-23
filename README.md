@@ -1,6 +1,10 @@
 
 # PankyReadTime (Joomla 5.x / 6 Content Plugin)
 
+**Version: 3.0.1**
+
+Fixed: Route to update channel
+
 **Version: 3.0.0**
 
 This plugin displays the average reading time for the current article and a scroll progress bar on Joomla 5.x sites. Output is shown only on single article pages (`com_content.article`).
