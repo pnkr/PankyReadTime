@@ -1,6 +1,10 @@
 
 # PankyReadTime (Joomla 5.x / 6 Content Plugin)
 
+**Version: 3.1.0**
+
+Security and Joomla 5/6 best-practice update (see changelog).
+
 **Version: 3.0.1**
 
 Fixed: Route to update channel
@@ -14,7 +18,7 @@ This plugin displays the average reading time for the current article and a scro
 - Option to show seconds in the estimate
 - Badge position: before content, after title, or after content
 - Badge format: verbose (e.g. "3 minutes, 20 seconds") or compact (e.g. "3m 20s")
-- Optional "Finish by" time (shows when the article will be finished based on server time)
+- Optional "Finish by" time (shows when the article will be finished, in the visitor's local time)
 - Customizable progress bar (color, height, top/bottom, optional percent label)
 - Fully localized (English/Greek)
 
@@ -39,6 +43,15 @@ This plugin displays the average reading time for the current article and a scro
 - Manifest and code version must match for releases
 
 ## Changelog
+**3.1.0**
+- Security: progress bar colour is validated (colour picker + server-side check) and all output is escaped
+- Inline script/styles moved to Web Asset Manager files under `media/plg_content_pankyreadingtime` (CSP-friendly)
+- Fix: update server now offers updates to every Joomla 5.1+ and 6.x version
+- Fix: more accurate word count (words across tags, non-breaking spaces, script/style content)
+- Fix: "Finish by" uses the visitor's local time and is no longer frozen by page caching
+- Uses Joomla 5+ typed content events; proper plural language strings
+- Badge time element uses class `pankyreadingtime-estimate` instead of the generic `id="time"`
+
 **3.0.0**
 - Restrict output to single article view
 - Remove unused visibility toggles

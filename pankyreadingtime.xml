@@ -3,17 +3,22 @@
 	<name>PLG_CONTENT_PANKYREADINGTIME</name>
 	<author>Panayiotis Kiriakopoulos</author>
 	<creationDate>October 2024</creationDate>
-	<copyright>(C) 2025 Panayiotis Kiriakopoulos</copyright>
+	<copyright>(C) 2024 Panayiotis Kiriakopoulos</copyright>
 	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
 	<authorEmail>kiriakopoulos_p@hotmail.com</authorEmail>
 	<authorUrl>https://github.com/pnkr</authorUrl>
-	<version>3.0.1</version>
+	<version>3.1.0</version>
 	<description>PLG_CONTENT_PANKYREADINGTIME_XML_DESCRIPTION</description>
 	<namespace path="src">Panky\Plugin\Content\Pankyreadingtime</namespace>
 	<files>
 		<folder plugin="pankyreadingtime">services</folder>
 		<folder>src</folder>
 	</files>
+	<media folder="media" destination="plg_content_pankyreadingtime">
+		<filename>joomla.asset.json</filename>
+		<folder>css</folder>
+		<folder>js</folder>
+	</media>
 
 	<languages>
 		<language tag="en-GB">language/en-GB/plg_content_pankyreadingtime.ini</language>
@@ -24,60 +29,60 @@
 	<config>
 		<fields name="params">
 		<fieldset name="basic" label="PLG_CONTENT_PANKYREADINGTIME_FIELDSET_BASIC_LABEL">
-			<field name="reading_speed" type="text" default="230"
+			<field name="reading_speed" type="number" default="230" min="1" max="2000" step="1" filter="integer"
 				label="PLG_CONTENT_PANKYREADINGTIME_READING_SPEED_LABEL" description="PLG_CONTENT_PANKYREADINGTIME_READING_SPEED_DESC" />
-			<field name="show_seconds" type="radio" default="1" label="PLG_CONTENT_PANKYREADINGTIME_SHOW_SECONDS_LABEL"
-				description="PLG_CONTENT_PANKYREADINGTIME_SHOW_SECONDS_DESC">
-				<option value="1">JYES</option>
+			<field name="show_seconds" type="radio" layout="joomla.form.field.radio.switcher" default="1" filter="integer"
+				label="PLG_CONTENT_PANKYREADINGTIME_SHOW_SECONDS_LABEL" description="PLG_CONTENT_PANKYREADINGTIME_SHOW_SECONDS_DESC">
 				<option value="0">JNO</option>
+				<option value="1">JYES</option>
 			</field>
 
 			<!-- Badge options -->
-			<field name="badge_position" type="list" default="before"
+			<field name="badge_position" type="list" default="before" validate="options"
 				label="PLG_CONTENT_PANKYREADINGTIME_BADGE_POSITION_LABEL" description="PLG_CONTENT_PANKYREADINGTIME_BADGE_POSITION_DESC">
-				<option value="before">Before Content</option>
-				<option value="afterTitle">After Title</option>
-				<option value="after">After Content</option>
+				<option value="before">PLG_CONTENT_PANKYREADINGTIME_BADGE_POSITION_BEFORE</option>
+				<option value="afterTitle">PLG_CONTENT_PANKYREADINGTIME_BADGE_POSITION_AFTER_TITLE</option>
+				<option value="after">PLG_CONTENT_PANKYREADINGTIME_BADGE_POSITION_AFTER</option>
 			</field>
-			<field name="badge_format" type="list" default="verbose"
+			<field name="badge_format" type="list" default="verbose" validate="options"
 				label="PLG_CONTENT_PANKYREADINGTIME_BADGE_FORMAT_LABEL" description="PLG_CONTENT_PANKYREADINGTIME_BADGE_FORMAT_DESC">
-				<option value="verbose">Verbose</option>
-				<option value="compact">Compact</option>
+				<option value="verbose">PLG_CONTENT_PANKYREADINGTIME_BADGE_FORMAT_VERBOSE</option>
+				<option value="compact">PLG_CONTENT_PANKYREADINGTIME_BADGE_FORMAT_COMPACT</option>
 			</field>
-			<field name="show_finish_by" type="radio" default="0" label="PLG_CONTENT_PANKYREADINGTIME_SHOW_FINISH_BY_LABEL"
-				description="PLG_CONTENT_PANKYREADINGTIME_SHOW_FINISH_BY_DESC">
-				<option value="1">JYES</option>
+			<field name="show_finish_by" type="radio" layout="joomla.form.field.radio.switcher" default="0" filter="integer"
+				label="PLG_CONTENT_PANKYREADINGTIME_SHOW_FINISH_BY_LABEL" description="PLG_CONTENT_PANKYREADINGTIME_SHOW_FINISH_BY_DESC">
 				<option value="0">JNO</option>
+				<option value="1">JYES</option>
 			</field>
 
 			<!-- Progress bar options -->
-			<field name="show_progress_bar" type="radio" default="1" label="PLG_CONTENT_PANKYREADINGTIME_SHOW_PROGRESS_BAR_LABEL"
-				description="PLG_CONTENT_PANKYREADINGTIME_SHOW_PROGRESS_BAR_DESC">
-				<option value="1">JYES</option>
+			<field name="show_progress_bar" type="radio" layout="joomla.form.field.radio.switcher" default="1" filter="integer"
+				label="PLG_CONTENT_PANKYREADINGTIME_SHOW_PROGRESS_BAR_LABEL" description="PLG_CONTENT_PANKYREADINGTIME_SHOW_PROGRESS_BAR_DESC">
 				<option value="0">JNO</option>
+				<option value="1">JYES</option>
 			</field>
-			<field name="progress_bar_color" type="text" default="#007bff"
-				label="PLG_CONTENT_PANKYREADINGTIME_PROGRESS_BAR_COLOR_LABEL" description="PLG_CONTENT_PANKYREADINGTIME_PROGRESS_BAR_COLOR_DESC" />
-			<field name="progress_bar_height" type="text" default="5"
-				label="PLG_CONTENT_PANKYREADINGTIME_PROGRESS_BAR_HEIGHT_LABEL" description="PLG_CONTENT_PANKYREADINGTIME_PROGRESS_BAR_HEIGHT_DESC" />
-			<field name="progress_bar_position" type="list" default="top"
-				label="PLG_CONTENT_PANKYREADINGTIME_PROGRESS_BAR_POSITION_LABEL" description="PLG_CONTENT_PANKYREADINGTIME_PROGRESS_BAR_POSITION_DESC">
+			<field name="progress_bar_color" type="color" default="#007bff" validate="color"
+				label="PLG_CONTENT_PANKYREADINGTIME_PROGRESS_BAR_COLOR_LABEL" description="PLG_CONTENT_PANKYREADINGTIME_PROGRESS_BAR_COLOR_DESC"
+				showon="show_progress_bar:1" />
+			<field name="progress_bar_height" type="number" default="5" min="1" max="50" step="1" filter="integer"
+				label="PLG_CONTENT_PANKYREADINGTIME_PROGRESS_BAR_HEIGHT_LABEL" description="PLG_CONTENT_PANKYREADINGTIME_PROGRESS_BAR_HEIGHT_DESC"
+				showon="show_progress_bar:1" />
+			<field name="progress_bar_position" type="list" default="top" validate="options"
+				label="PLG_CONTENT_PANKYREADINGTIME_PROGRESS_BAR_POSITION_LABEL" description="PLG_CONTENT_PANKYREADINGTIME_PROGRESS_BAR_POSITION_DESC"
+				showon="show_progress_bar:1">
 				<option value="top">PLG_CONTENT_PANKYREADINGTIME_PROGRESS_BAR_POSITION_TOP</option>
 				<option value="bottom">PLG_CONTENT_PANKYREADINGTIME_PROGRESS_BAR_POSITION_BOTTOM</option>
 			</field>
-			<field name="progress_bar_show_percent" type="radio" default="0" label="PLG_CONTENT_PANKYREADINGTIME_PROGRESS_BAR_SHOW_PERCENT_LABEL"
-				description="PLG_CONTENT_PANKYREADINGTIME_PROGRESS_BAR_SHOW_PERCENT_DESC">
-				<option value="1">JYES</option>
+			<field name="progress_bar_show_percent" type="radio" layout="joomla.form.field.radio.switcher" default="0" filter="integer"
+				label="PLG_CONTENT_PANKYREADINGTIME_PROGRESS_BAR_SHOW_PERCENT_LABEL" description="PLG_CONTENT_PANKYREADINGTIME_PROGRESS_BAR_SHOW_PERCENT_DESC"
+				showon="show_progress_bar:1">
 				<option value="0">JNO</option>
+				<option value="1">JYES</option>
 			</field>
-
-			<!-- Visibility toggles removed: plugin restricted to single article view -->
 		</fieldset>
 		</fields>
 	</config>
 	<updateservers>
-    <server type="extension" name="Content Plugin PankyReadTime">
-		https://raw.githubusercontent.com/pnkr/PankyReadTime/master/updates.xml
-    </server>
-</updateservers>
+		<server type="extension" name="Content Plugin PankyReadTime">https://raw.githubusercontent.com/pnkr/PankyReadTime/master/updates.xml</server>
+	</updateservers>
 </extension>

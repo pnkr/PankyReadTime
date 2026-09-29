@@ -1,0 +1,33 @@
+.pankyreadingtime-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 0;
+  height: var(--pankyreadingtime-height, 5px);
+  background: var(--pankyreadingtime-color, #007bff);
+  pointer-events: none;
+}
+
+.pankyreadingtime-progress--bottom {
+  top: auto;
+  bottom: 0;
+}
+
+.pankyreadingtime-percent {
+  position: fixed;
+  top: calc(var(--pankyreadingtime-height, 5px) + 2px);
+  right: 8px;
+  z-index: 9999;
+  padding: 2px 6px;
+  font-size: 12px;
+  color: #495057;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 10px;
+  pointer-events: none;
+}
+
+.pankyreadingtime-percent--bottom {
+  top: auto;
+  bottom: calc(var(--pankyreadingtime-height, 5px) + 2px);
+}
