@@ -19,6 +19,7 @@ This plugin displays the average reading time for the current article and a scro
 - Badge position: before content, after title, or after content
 - Badge format: verbose (e.g. "3 minutes, 20 seconds") or compact (e.g. "3m 20s")
 - Optional "Finish by" time (shows when the article will be finished, in the visitor's local time)
+- Optional "Listen to article" button (play/pause/stop) using the browser's built-in text-to-speech, in the page language, with optional highlighting of the word being read
 - Customizable progress bar (color, height, top/bottom, optional percent label)
 - Fully localized (English/Greek)
 

@@ -1,19 +1,21 @@
 {
   "$schema": "https://developer.joomla.org/schemas/json-schema/web_assets.json",
   "name": "plg_content_pankyreadingtime",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "description": "Article reading time and scroll progress bar",
   "license": "GPL-2.0-or-later",
   "assets": [
     {
       "name": "plg_content_pankyreadingtime.progress",
       "type": "style",
-      "uri": "plg_content_pankyreadingtime/progress.css"
+      "uri": "plg_content_pankyreadingtime/progress.css",
+      "version": "auto"
     },
     {
       "name": "plg_content_pankyreadingtime.progress",
       "type": "script",
       "uri": "plg_content_pankyreadingtime/progress.js",
+      "version": "auto",
       "attributes": {
         "defer": true
       }

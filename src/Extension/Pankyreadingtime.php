@@ -31,6 +31,8 @@ final class Pankyreadingtime extends CMSPlugin implements SubscriberInterface
 
     private const DEFAULT_HEIGHT = 5;
 
+    private const DEFAULT_HIGHLIGHT_COLOR = '#ffe066';
+
     private const ASSET_NAME = 'plg_content_pankyreadingtime.progress';
 
     protected $autoloadLanguage = true;
@@ -69,6 +71,11 @@ final class Pankyreadingtime extends CMSPlugin implements SubscriberInterface
 
         // Kept on the item (not the plugin) so template overrides can keep using $item->readingTime
         $article->readingTime = $this->renderBadge(intdiv($totalSeconds, 60), $totalSeconds % 60);
+
+        if ($this->params->get('show_listen', 0)) {
+            // Marks the article body so the browser reads only the article text aloud
+            $article->text = '<div class="pankyreadingtime-body">' . $article->text . '</div>';
+        }
     }
 
     public function onContentAfterTitle(AfterTitleEvent $event): void
@@ -177,7 +184,54 @@ final class Pankyreadingtime extends CMSPlugin implements SubscriberInterface
                 . $this->escape(Text::_('PLG_CONTENT_PANKYREADINGTIME_FINISH_BY')) . ' <time></time></span>';
         }
 
-        return $html . '</div>';
+        $html .= '</div>';
+
+        if ($this->params->get('show_listen', 0)) {
+            $html .= $this->renderListenControls();
+        }
+
+        return $html;
+    }
+
+    /**
+     * Renders the text-to-speech controls. They stay hidden until the script confirms the browser supports speech.
+     */
+    private function renderListenControls(): string
+    {
+        $this->loadAssets();
+
+        $play        = $this->escape(Text::_('PLG_CONTENT_PANKYREADINGTIME_LISTEN'));
+        $wrapClass   = $this->classList('listen_class', 'mb-2');
+        $buttonClass = $this->classList('listen_button_class', 'btn btn-sm btn-outline-secondary');
+
+        return '<div class="pankyreadingtime-listen' . $wrapClass . '"'
+            . ' data-highlight="' . ($this->params->get('listen_highlight', 1) ? '1' : '0') . '" hidden>'
+            . '<button type="button" class="pankyreadingtime-listen-toggle' . $buttonClass . '"'
+            . ' data-label-play="' . $play . '"'
+            . ' data-label-pause="' . $this->escape(Text::_('PLG_CONTENT_PANKYREADINGTIME_LISTEN_PAUSE')) . '"'
+            . ' data-label-resume="' . $this->escape(Text::_('PLG_CONTENT_PANKYREADINGTIME_LISTEN_RESUME')) . '">'
+            . '<span class="icon-play" aria-hidden="true"></span> <span class="pankyreadingtime-listen-label">' . $play . '</span>'
+            . '</button>'
+            . '<button type="button" class="pankyreadingtime-listen-stop' . $buttonClass . '" hidden>'
+            . '<span class="icon-stop" aria-hidden="true"></span> ' . $this->escape(Text::_('PLG_CONTENT_PANKYREADINGTIME_LISTEN_STOP'))
+            . '</button>'
+            . '</div>';
+    }
+
+    /**
+     * Returns the configured CSS classes as an escaped string with a leading space, or '' when none are set.
+     *
+     * @param   string  $param    The plugin parameter holding the classes
+     * @param   string  $default  Used when the parameter has never been saved (e.g. right after an upgrade)
+     */
+    private function classList(string $param, string $default): string
+    {
+        // Read the raw value: Registry::get() would also return the default for a field the admin deliberately cleared
+        $saved   = $this->params->toArray();
+        $value   = \array_key_exists($param, $saved) ? (string) $saved[$param] : $default;
+        $classes = preg_split('/\s+/', trim($value), -1, PREG_SPLIT_NO_EMPTY) ?: [];
+
+        return $classes ? ' ' . $this->escape(implode(' ', $classes)) : '';
     }
 
     private function loadAssets(): void
@@ -194,19 +248,27 @@ final class Pankyreadingtime extends CMSPlugin implements SubscriberInterface
 
         $this->assetsLoaded = true;
 
-        $color = (string) $this->params->get('progress_bar_color', self::DEFAULT_COLOR);
-
-        if (!preg_match('/^#(?:[0-9a-f]{3}|[0-9a-f]{6}|[0-9a-f]{8})$/i', $color)) {
-            $color = self::DEFAULT_COLOR;
-        }
-
-        $height = max(1, min(50, (int) $this->params->get('progress_bar_height', self::DEFAULT_HEIGHT)));
+        $color     = $this->colorParam('progress_bar_color', self::DEFAULT_COLOR);
+        $highlight = $this->colorParam('listen_highlight_color', self::DEFAULT_HIGHLIGHT_COLOR);
+        $height    = max(1, min(50, (int) $this->params->get('progress_bar_height', self::DEFAULT_HEIGHT)));
 
         $wa = $document->getWebAssetManager();
         $wa->getRegistry()->addExtensionRegistryFile('plg_content_pankyreadingtime');
         $wa->useStyle(self::ASSET_NAME)
             ->useScript(self::ASSET_NAME)
-            ->addInlineStyle(':root{--pankyreadingtime-color:' . $color . ';--pankyreadingtime-height:' . $height . 'px}');
+            ->addInlineStyle(':root{--pankyreadingtime-color:' . $color . ';--pankyreadingtime-height:' . $height . 'px}')
+            // Separate rule: browsers that don't know ::highlight drop only this one
+            ->addInlineStyle('::highlight(pankyreadingtime-word){background-color:' . $highlight . ';color:#000}');
+    }
+
+    /**
+     * Returns a hex colour parameter, falling back to the default for anything that isn't a valid hex colour.
+     */
+    private function colorParam(string $param, string $default): string
+    {
+        $color = (string) $this->params->get($param, $default);
+
+        return preg_match('/^#(?:[0-9a-f]{3}|[0-9a-f]{6}|[0-9a-f]{8})$/i', $color) ? $color : $default;
     }
 
     private function escape(string $value): string

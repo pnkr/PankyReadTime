@@ -27,6 +27,17 @@
   pointer-events: none;
 }
 
+.pankyreadingtime-listen {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.pankyreadingtime-listen[hidden],
+.pankyreadingtime-listen [hidden] {
+  display: none;
+}
+
 .pankyreadingtime-percent--bottom {
   top: auto;
   bottom: calc(var(--pankyreadingtime-height, 5px) + 2px);
