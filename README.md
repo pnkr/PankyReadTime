@@ -1,5 +1,9 @@
 
-# PankyReadTime (Joomla 5.x / 6 Content Plugin)
+# PankyReadTime (6 Content Plugin)
+
+**Version: 3.2.0**
+Added Text to Voice support
+Set the release for Joomla 6x only
 
 **Version: 3.1.0**
 
