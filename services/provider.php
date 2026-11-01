@@ -17,7 +17,6 @@ use Joomla\CMS\Factory;
 use Joomla\CMS\Plugin\PluginHelper;
 use Joomla\DI\Container;
 use Joomla\DI\ServiceProviderInterface;
-use Joomla\Event\DispatcherInterface;
 use Panky\Plugin\Content\Pankyreadingtime\Extension\Pankyreadingtime;
 
 return new class () implements ServiceProviderInterface {
@@ -26,11 +25,8 @@ return new class () implements ServiceProviderInterface {
         $container->set(
             PluginInterface::class,
             function (Container $container) {
-                // Passing the dispatcher is required on Joomla 5.1-5.3 and deprecated (until 7.0) from 5.4 on
-                $plugin = new Pankyreadingtime(
-                    $container->get(DispatcherInterface::class),
-                    (array) PluginHelper::getPlugin('content', 'pankyreadingtime')
-                );
+                // Joomla 6.1+ form: the dispatcher is no longer passed to the constructor
+                $plugin = new Pankyreadingtime((array) PluginHelper::getPlugin('content', 'pankyreadingtime'));
                 $plugin->setApplication(Factory::getApplication());
 
                 return $plugin;

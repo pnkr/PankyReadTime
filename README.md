@@ -1,5 +1,10 @@
 
-# PankyReadTime (6 Content Plugin)
+# PankyReadTime (Joomla 6 Content Plugin)
+
+**Requirements:** Joomla 6.1+ and PHP 8.3+. Sites on Joomla 5.1–6.0 should stay on 3.2.0.
+
+**Version: 4.0.0**
+Joomla 6.1+ only (see changelog)
 
 **Version: 3.2.0**
 Added Text to Voice support
@@ -48,6 +53,14 @@ This plugin displays the average reading time for the current article and a scro
 - Manifest and code version must match for releases
 
 ## Changelog
+**4.0.0**
+- Requires Joomla 6.1+ and PHP 8.3+; Joomla 5.x and 6.0 are no longer supported
+- Uses the Joomla 6.1 plugin constructor (no dispatcher argument), removing the deprecation notice on 6.1+
+- Update server moved to `https://joomlaboratory.com/updates_7.xml`; changelog at `https://joomlaboratory.com/changelog_7.xml`
+
+**3.2.0**
+- Added "Listen to article" (browser text-to-speech) with optional word highlighting
+
 **3.1.0**
 - Security: progress bar colour is validated (colour picker + server-side check) and all output is escaped
 - Inline script/styles moved to Web Asset Manager files under `media/plg_content_pankyreadingtime` (CSP-friendly)

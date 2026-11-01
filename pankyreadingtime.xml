@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension version="5.1" type="plugin" group="content" method="upgrade">
+<extension version="6.1" type="plugin" group="content" method="upgrade">
 	<name>PLG_CONTENT_PANKYREADINGTIME</name>
 	<author>Panayiotis Kiriakopoulos</author>
 	<creationDate>October 2024</creationDate>
@@ -7,7 +7,7 @@
 	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
 	<authorEmail>kiriakopoulos_p@hotmail.com</authorEmail>
 	<authorUrl>https://github.com/pnkr</authorUrl>
-	<version>3.2.0</version>
+	<version>4.0.0</version>
 	<description>PLG_CONTENT_PANKYREADINGTIME_XML_DESCRIPTION</description>
 	<namespace path="src">Panky\Plugin\Content\Pankyreadingtime</namespace>
 	<files>
@@ -103,6 +103,7 @@
 		</fields>
 	</config>
 	<updateservers>
-		<server type="extension" name="Content Plugin PankyReadTime">https://raw.githubusercontent.com/pnkr/PankyReadTime/master/updates.xml</server>
+		<server type="extension" name="Content Plugin PankyReadTime">https://joomlaboratory.com/updates_7.xml</server>
 	</updateservers>
+	<changelogurl>https://joomlaboratory.com/changelog_7.xml</changelogurl>
 </extension>
