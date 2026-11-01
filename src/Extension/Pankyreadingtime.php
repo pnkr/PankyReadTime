@@ -194,7 +194,7 @@ final class Pankyreadingtime extends CMSPlugin implements SubscriberInterface
     }
 
     /**
-     * Renders the text-to-speech controls. They stay hidden until the script confirms the browser supports speech.
+     * Renders the text-to-speech controls. They stay hidden until the script confirms the browser has a voice to speak with.
      */
     private function renderListenControls(): string
     {
@@ -209,12 +209,14 @@ final class Pankyreadingtime extends CMSPlugin implements SubscriberInterface
             . '<button type="button" class="pankyreadingtime-listen-toggle' . $buttonClass . '"'
             . ' data-label-play="' . $play . '"'
             . ' data-label-pause="' . $this->escape(Text::_('PLG_CONTENT_PANKYREADINGTIME_LISTEN_PAUSE')) . '"'
-            . ' data-label-resume="' . $this->escape(Text::_('PLG_CONTENT_PANKYREADINGTIME_LISTEN_RESUME')) . '">'
+            . ' data-label-resume="' . $this->escape(Text::_('PLG_CONTENT_PANKYREADINGTIME_LISTEN_RESUME')) . '"'
+            . ' data-label-unavailable="' . $this->escape(Text::_('PLG_CONTENT_PANKYREADINGTIME_LISTEN_UNAVAILABLE')) . '">'
             . '<span class="icon-play" aria-hidden="true"></span> <span class="pankyreadingtime-listen-label">' . $play . '</span>'
             . '</button>'
             . '<button type="button" class="pankyreadingtime-listen-stop' . $buttonClass . '" hidden>'
             . '<span class="icon-stop" aria-hidden="true"></span> ' . $this->escape(Text::_('PLG_CONTENT_PANKYREADINGTIME_LISTEN_STOP'))
             . '</button>'
+            . '<span class="pankyreadingtime-listen-message" role="status"></span>'
             . '</div>';
     }
 

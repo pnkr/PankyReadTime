@@ -33,6 +33,11 @@
   gap: 0.5rem;
 }
 
+.pankyreadingtime-listen-message {
+  align-self: center;
+  font-size: 0.875rem;
+}
+
 .pankyreadingtime-listen[hidden],
 .pankyreadingtime-listen [hidden] {
   display: none;

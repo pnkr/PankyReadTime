@@ -5,9 +5,9 @@
 	<creationDate>October 2024</creationDate>
 	<copyright>(C) 2024..2026 Panayiotis Kiriakopoulos</copyright>
 	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
-	<authorEmail>kiriakopoulos_p@hotmail.com</authorEmail>
-	<authorUrl>https://github.com/pnkr</authorUrl>
-	<version>4.0.0</version>
+	<authorEmail>info@joomlaboratory.com</authorEmail>
+	<authorUrl>https://joomlaboratory.com</authorUrl>
+	<version>4.0.1</version>
 	<description>PLG_CONTENT_PANKYREADINGTIME_XML_DESCRIPTION</description>
 	<namespace path="src">Panky\Plugin\Content\Pankyreadingtime</namespace>
 	<files>

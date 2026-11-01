@@ -73,6 +73,12 @@
   const SENTENCE = /[^.!?;;…\n]+[.!?;;…]*/g;
   const WORD = /[^\s.,!?;:;…"«»“”()[\]]+/y;
   const HIGHLIGHT_NAME = 'pankyreadingtime-word';
+  // Speech that hasn't started by then is treated as unavailable (e.g. Linux without a working speech-dispatcher)
+  const START_TIMEOUT = 4000;
+  // Chrome can drop an utterance queued right after cancel(), so speaking is started after a short pause
+  const CANCEL_DELAY = 100;
+  // Times (ms) at which to re-check for voices, for browsers that load them late without firing voiceschanged
+  const VOICE_CHECKS = [250, 1000, 3000];
 
   /**
    * Collects the visible text of `root` together with the text node each part came from, so a character
@@ -222,6 +228,7 @@
     const stop = controls.querySelector('.pankyreadingtime-listen-stop');
     const label = toggle.querySelector('.pankyreadingtime-listen-label');
     const icon = toggle.querySelector('[aria-hidden="true"]');
+    const message = controls.querySelector('.pankyreadingtime-listen-message');
     const lang = document.documentElement.lang || '';
     // Browsers without the CSS Custom Highlight API still read aloud, just without highlighting
     const canHighlight = controls.dataset.highlight === '1'
@@ -233,6 +240,7 @@
     let state = 'idle';
     // Bumped on every pause/stop so callbacks from cancelled utterances are ignored
     let session = 0;
+    let startTimer = 0;
 
     const pickVoice = () => {
       if (!lang) {
@@ -314,6 +322,28 @@
       if (next === 'idle') {
         clearHighlight();
       }
+
+      if (next === 'playing' && message) {
+        message.textContent = '';
+      }
+    };
+
+    const clearStartTimer = () => {
+      window.clearTimeout(startTimer);
+      startTimer = 0;
+    };
+
+    // Speech failed or never started: reset the controls and tell the visitor why nothing is heard
+    const fail = () => {
+      clearStartTimer();
+      session += 1;
+      synth.cancel();
+      index = 0;
+      setState('idle');
+
+      if (message) {
+        message.textContent = toggle.dataset.labelUnavailable || '';
+      }
     };
 
     const speakNext = () => {
@@ -336,10 +366,23 @@
         utterance.voice = voice;
       }
 
+      // Any sign of life from the engine means speech is working
+      utterance.onstart = () => {
+        if (token === session) {
+          clearStartTimer();
+        }
+      };
+
       if (canHighlight) {
         // Fired per word by most local voices; some online voices (e.g. Chrome's Google voices) never fire it
         utterance.onboundary = (event) => {
-          if (token !== session || (event.name && event.name !== 'word')) {
+          if (token !== session) {
+            return;
+          }
+
+          clearStartTimer();
+
+          if (event.name && event.name !== 'word') {
             return;
           }
 
@@ -358,6 +401,7 @@
 
       utterance.onend = () => {
         if (token === session) {
+          clearStartTimer();
           index += 1;
           speakNext();
         }
@@ -365,16 +409,23 @@
 
       utterance.onerror = (event) => {
         if (token === session && event.error !== 'interrupted' && event.error !== 'canceled') {
-          index = 0;
-          setState('idle');
+          fail();
         }
       };
+
+      clearStartTimer();
+      startTimer = window.setTimeout(() => {
+        if (token === session && state === 'playing') {
+          fail();
+        }
+      }, START_TIMEOUT);
 
       synth.speak(utterance);
     };
 
     // Pause is a cancel that remembers the position: synth.pause() is unreliable on mobile browsers
     const halt = () => {
+      clearStartTimer();
       session += 1;
       synth.cancel();
     };
@@ -394,7 +445,14 @@
 
       halt();
       setState('playing');
-      speakNext();
+
+      const token = session;
+
+      window.setTimeout(() => {
+        if (token === session && state === 'playing') {
+          speakNext();
+        }
+      }, CANCEL_DELAY);
     });
 
     stop.addEventListener('click', () => {
@@ -404,7 +462,27 @@
     });
 
     window.addEventListener('pagehide', halt);
-    controls.hidden = false;
+
+    // Show the controls only once the browser reports a voice: without one (e.g. Linux without
+    // speech-dispatcher voices, or a snap browser that can't reach it) the button would do nothing
+    const reveal = () => {
+      if (!controls.hidden || !synth.getVoices().length) {
+        return;
+      }
+
+      controls.hidden = false;
+
+      if (typeof synth.removeEventListener === 'function') {
+        synth.removeEventListener('voiceschanged', reveal);
+      }
+    };
+
+    if (typeof synth.addEventListener === 'function') {
+      synth.addEventListener('voiceschanged', reveal);
+    }
+
+    reveal();
+    VOICE_CHECKS.forEach((delay) => window.setTimeout(reveal, delay));
   };
 
   const init = () => {

@@ -7,17 +7,17 @@
 		<type>plugin</type>
 		<folder>content</folder>
 		<client>site</client>
-		<version>4.0.0</version>
+		<version>4.0.1</version>
 		<infourl title="Content Plugin PankyReadTime">https://github.com/pnkr/PankyReadTime</infourl>
 		<downloads>
-			<downloadurl type="full" format="zip">https://github.com/pnkr/PankyReadTime/releases/download/v4.0.0/pankyreadingtime-4.0.0.zip</downloadurl>
+			<downloadurl type="full" format="zip">https://github.com/pnkr/PankyReadTime/releases/download/v4.0.1/pankyreadingtime-4.0.1.zip</downloadurl>
 		</downloads>
-		<sha512>4fddaa7a65e4788aff6e4cac3273dd56320ece398e5a636c125d7cd8510c5a9cedb94d66fe7b9d4de42f8e0fe60056c018f19a14510652d45e91c4e02be58839</sha512>
+		<sha512>4d2c2ebb83d74b870b62b565a67b15987cdb0f2a98e84e570bc462cf6ca071278d7e8fb50cacdbf85b34d93a63294897e2239ed0806b0064fd85b88aff3e616f</sha512>
 		<tags>
 			<tag>stable</tag>
 		</tags>
 		<maintainer>Panayiotis Kiriakopoulos</maintainer>
-		<maintainerurl>https://github.com/pnkr</maintainerurl>
+		<maintainerurl>https://joomlaboratory.com</maintainerurl>
 		<!-- Joomla matches this as the regex /^...$version/, so every alternative must be grouped -->
 		<targetplatform name="joomla" version="6\.[1-9]" />
 		<php_minimum>8.3.0</php_minimum>

@@ -3,6 +3,9 @@
 
 **Requirements:** Joomla 6.1+ and PHP 8.3+. Sites on Joomla 5.1–6.0 should stay on 3.2.0.
 
+**Version: 4.0.1**
+Text to Voice fixes for Linux/Ubuntu (see changelog)
+
 **Version: 4.0.0**
 Joomla 6.1+ only (see changelog)
 
@@ -28,7 +31,7 @@ This plugin displays the average reading time for the current article and a scro
 - Badge position: before content, after title, or after content
 - Badge format: verbose (e.g. "3 minutes, 20 seconds") or compact (e.g. "3m 20s")
 - Optional "Finish by" time (shows when the article will be finished, in the visitor's local time)
-- Optional "Listen to article" button (play/pause/stop) using the browser's built-in text-to-speech, in the page language, with optional highlighting of the word being read
+- Optional "Listen to article" button (play/pause/stop) using the browser's built-in text-to-speech, in the page language, with optional highlighting of the word being read. On Linux, the browser needs speech-dispatcher and a voice (e.g. `sudo apt install speech-dispatcher espeak-ng`)
 - Customizable progress bar (color, height, top/bottom, optional percent label)
 - Fully localized (English/Greek)
 
@@ -53,6 +56,12 @@ This plugin displays the average reading time for the current article and a scro
 - Manifest and code version must match for releases
 
 ## Changelog
+**4.0.1**
+- Fix: the Listen button only appears when the browser has a voice to speak with. On Linux (e.g. Ubuntu) without speech-dispatcher voices, or in snap browsers that can't reach it, it used to show but stay silent
+- Fix: if speech doesn't start within 4 seconds or the browser reports an error, the controls reset and show "Speech isn't available in this browser" instead of staying on "Pause"
+- Fix: work around Chrome sometimes dropping speech that starts right after a stop
+- Author and maintainer details now point to Joomlaboratory
+
 **4.0.0**
 - Requires Joomla 6.1+ and PHP 8.3+; Joomla 5.x and 6.0 are no longer supported
 - Uses the Joomla 6.1 plugin constructor (no dispatcher argument), removing the deprecation notice on 6.1+

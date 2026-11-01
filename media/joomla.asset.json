@@ -1,7 +1,7 @@
 {
   "$schema": "https://developer.joomla.org/schemas/json-schema/web_assets.json",
   "name": "plg_content_pankyreadingtime",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "Article reading time and scroll progress bar",
   "license": "GPL-2.0-or-later",
   "assets": [
